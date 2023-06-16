@@ -1,0 +1,36 @@
+class Order:
+    def __init__(self, customer, products):
+        self.customer = customer
+        self.products = products
+        self.total = sum(product.price for product in products)
+    
+    def process_payment(self):
+        self.customer.pay(self.total)
+        print(f"Payment of {self.total} processed successfully.")
+    
+    def get_order_details(self):
+        return f"Order details: {self.customer.get_customer_details()}, Products: {','.join([product.name for product in self.products])}, Total: {self.total}"
+
+class Customer:
+    def __init__(self, id, name, address, balance):
+        self.id = id
+        self.name = name
+        self.address = address
+        self.balance = balance
+    
+    def pay(self, amount):
+        self.balance -= amount
+        print(f"Payment of {amount} made by Customer {self.id}. Balance: {self.balance}")
+    
+    def get_customer_details(self):
+        return f"Customer ID: {self.id}, Name: {self.name}, Address: {self.address}, Balance: {self.balance}"
+
+class Product:
+    def __init__(self, id, name, description, price):
+        self.id = id
+        self.name = name
+        self.description = description
+        self.price = price
+    
+    def get_product_details(self):
+        return f"Product ID: {self.id}, Name: {self.name}, Description: {self.description}, Price: {self.price}"
